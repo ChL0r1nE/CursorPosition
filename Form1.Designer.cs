@@ -30,27 +30,58 @@
         {
             this.textBoxX = new System.Windows.Forms.TextBox();
             this.textBoxY = new System.Windows.Forms.TextBox();
+            this.anchorBox = new System.Windows.Forms.TextBox();
+            this.hideBackgroundButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBoxX
             // 
-            this.textBoxX.Location = new System.Drawing.Point(4, 4);
+            this.textBoxX.BackColor = System.Drawing.SystemColors.Info;
+            this.textBoxX.Location = new System.Drawing.Point(4, 38);
             this.textBoxX.Name = "textBoxX";
-            this.textBoxX.Size = new System.Drawing.Size(70, 20);
+            this.textBoxX.ReadOnly = true;
+            this.textBoxX.Size = new System.Drawing.Size(50, 20);
             this.textBoxX.TabIndex = 0;
+            this.textBoxX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBoxY
             // 
-            this.textBoxY.Location = new System.Drawing.Point(80, 4);
+            this.textBoxY.BackColor = System.Drawing.SystemColors.Info;
+            this.textBoxY.Location = new System.Drawing.Point(60, 38);
             this.textBoxY.Name = "textBoxY";
-            this.textBoxY.Size = new System.Drawing.Size(70, 20);
+            this.textBoxY.ReadOnly = true;
+            this.textBoxY.Size = new System.Drawing.Size(50, 20);
             this.textBoxY.TabIndex = 1;
+            this.textBoxY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // anchorBox
+            // 
+            this.anchorBox.BackColor = System.Drawing.SystemColors.Info;
+            this.anchorBox.Location = new System.Drawing.Point(4, 13);
+            this.anchorBox.Name = "anchorBox";
+            this.anchorBox.ReadOnly = true;
+            this.anchorBox.Size = new System.Drawing.Size(106, 20);
+            this.anchorBox.TabIndex = 3;
+            this.anchorBox.Text = "anchor 0 0";
+            this.anchorBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // hideBackgroundButton
+            // 
+            this.hideBackgroundButton.Location = new System.Drawing.Point(4, 64);
+            this.hideBackgroundButton.Name = "hideBackgroundButton";
+            this.hideBackgroundButton.Size = new System.Drawing.Size(106, 23);
+            this.hideBackgroundButton.TabIndex = 5;
+            this.hideBackgroundButton.Text = "Hide background";
+            this.hideBackgroundButton.UseVisualStyleBackColor = true;
+            this.hideBackgroundButton.Click += new System.EventHandler(this.HideBackground);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(157, 30);
+            this.ClientSize = new System.Drawing.Size(113, 88);
+            this.Controls.Add(this.hideBackgroundButton);
+            this.Controls.Add(this.anchorBox);
             this.Controls.Add(this.textBoxY);
             this.Controls.Add(this.textBoxX);
             this.Name = "Form1";
@@ -64,6 +95,8 @@
 
         private System.Windows.Forms.TextBox textBoxX;
         private System.Windows.Forms.TextBox textBoxY;
+        private System.Windows.Forms.TextBox anchorBox;
+        private System.Windows.Forms.Button hideBackgroundButton;
     }
 }
 
