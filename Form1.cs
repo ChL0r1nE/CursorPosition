@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -20,11 +21,25 @@ namespace CursorPosition
         {
             InitializeComponent();
 
-            UpdatePosition();
+            UpdatePositionAndColor();
             SetAnchorCheck();
 
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             TopMost = true;
+        }
+
+        private Color GetDesktopColor(int x, int y)
+        {
+            using (Bitmap bitmap = new Bitmap(1920, 1080, PixelFormat.Format32bppArgb))
+            {
+                using (Graphics graphics = Graphics.FromImage(bitmap))
+                {
+                    graphics.CopyFromScreen(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, 0, 0,
+                        Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
+                }
+
+                return bitmap.GetPixel(x, y);
+            }
         }
 
         private void HideBackground(object sender, EventArgs e)
@@ -34,7 +49,7 @@ namespace CursorPosition
             hideBackgroundButton.Dispose();
         }
 
-        async void UpdatePosition()
+        async void UpdatePositionAndColor()
         {
             while (true)
             {
@@ -42,6 +57,12 @@ namespace CursorPosition
 
                 textBoxX.Text = $"{cursorPosition.X - _anchor.X}";
                 textBoxY.Text = $"{cursorPosition.Y - _anchor.Y}";
+
+                Color pixelColor = GetDesktopColor(cursorPosition.X, cursorPosition.Y);
+
+                colorBoxR.Text = $"{pixelColor.R}";
+                colorBoxG.Text = $"{pixelColor.G}";
+                colorBoxB.Text = $"{pixelColor.B}";
 
                 await Task.Delay(100);
             }

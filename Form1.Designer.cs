@@ -32,6 +32,9 @@
             this.textBoxY = new System.Windows.Forms.TextBox();
             this.anchorBox = new System.Windows.Forms.TextBox();
             this.hideBackgroundButton = new System.Windows.Forms.Button();
+            this.colorBoxR = new System.Windows.Forms.TextBox();
+            this.colorBoxG = new System.Windows.Forms.TextBox();
+            this.colorBoxB = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // textBoxX
@@ -78,11 +81,41 @@
             this.hideBackgroundButton.UseVisualStyleBackColor = true;
             this.hideBackgroundButton.Click += new System.EventHandler(this.HideBackground);
             // 
+            // colorBoxR
+            // 
+            this.colorBoxR.BackColor = System.Drawing.SystemColors.Info;
+            this.colorBoxR.Location = new System.Drawing.Point(0, 40);
+            this.colorBoxR.Name = "colorBoxR";
+            this.colorBoxR.ReadOnly = true;
+            this.colorBoxR.Size = new System.Drawing.Size(33, 20);
+            this.colorBoxR.TabIndex = 6;
+            // 
+            // colorBoxG
+            // 
+            this.colorBoxG.BackColor = System.Drawing.SystemColors.Info;
+            this.colorBoxG.Location = new System.Drawing.Point(33, 40);
+            this.colorBoxG.Name = "colorBoxG";
+            this.colorBoxG.ReadOnly = true;
+            this.colorBoxG.Size = new System.Drawing.Size(34, 20);
+            this.colorBoxG.TabIndex = 7;
+            // 
+            // colorBoxB
+            // 
+            this.colorBoxB.BackColor = System.Drawing.SystemColors.Info;
+            this.colorBoxB.Location = new System.Drawing.Point(67, 40);
+            this.colorBoxB.Name = "colorBoxB";
+            this.colorBoxB.ReadOnly = true;
+            this.colorBoxB.Size = new System.Drawing.Size(33, 20);
+            this.colorBoxB.TabIndex = 8;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(179, 44);
+            this.ClientSize = new System.Drawing.Size(179, 67);
+            this.Controls.Add(this.colorBoxB);
+            this.Controls.Add(this.colorBoxG);
+            this.Controls.Add(this.colorBoxR);
             this.Controls.Add(this.hideBackgroundButton);
             this.Controls.Add(this.anchorBox);
             this.Controls.Add(this.textBoxY);
@@ -100,6 +133,9 @@
         private System.Windows.Forms.TextBox textBoxY;
         private System.Windows.Forms.TextBox anchorBox;
         private System.Windows.Forms.Button hideBackgroundButton;
+        private System.Windows.Forms.TextBox colorBoxR;
+        private System.Windows.Forms.TextBox colorBoxG;
+        private System.Windows.Forms.TextBox colorBoxB;
     }
 }
 
