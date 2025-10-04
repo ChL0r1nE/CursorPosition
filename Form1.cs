@@ -17,12 +17,16 @@ namespace CursorPosition
 
         private Point _anchor = new Point(0, 0);
 
+        private readonly Bitmap _screenshotedBitmap = new Bitmap(1920, 1080, PixelFormat.Format32bppArgb);
+        private bool _screenshoted = false;
+
         public Form1()
         {
             InitializeComponent();
 
             UpdatePositionAndColor();
             SetAnchorCheck();
+            FrozeScreen();
 
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             TopMost = true;
@@ -30,15 +34,17 @@ namespace CursorPosition
 
         private Color GetDesktopColor(int x, int y)
         {
-            using (Bitmap bitmap = new Bitmap(1920, 1080, PixelFormat.Format32bppArgb))
+            if (_screenshoted)
+                return _screenshotedBitmap.GetPixel(x, y);
+            else
             {
-                using (Graphics graphics = Graphics.FromImage(bitmap))
+                using (Bitmap bitmap = new Bitmap(1920, 1080, PixelFormat.Format32bppArgb))
                 {
-                    graphics.CopyFromScreen(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, 0, 0,
-                        Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
-                }
+                    using (Graphics graphics = Graphics.FromImage(bitmap))
+                        graphics.CopyFromScreen(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
 
-                return bitmap.GetPixel(x, y);
+                    return bitmap.GetPixel(x, y);
+                }
             }
         }
 
@@ -49,7 +55,7 @@ namespace CursorPosition
             hideBackgroundButton.Dispose();
         }
 
-        async void UpdatePositionAndColor()
+        async private void UpdatePositionAndColor()
         {
             while (true)
             {
@@ -68,7 +74,7 @@ namespace CursorPosition
             }
         }
 
-        async void SetAnchorCheck()
+        async private void SetAnchorCheck()
         {
             while (true)
             {
@@ -79,7 +85,26 @@ namespace CursorPosition
                 GetCursorPos(out Point cursorPosition);
 
                 _anchor = new Point(cursorPosition.X, cursorPosition.Y);
-                anchorBox.Text = $"anchor {cursorPosition.X} {cursorPosition.Y}";
+                anchorTextBox.Text = $"anchor {cursorPosition.X} {cursorPosition.Y}";
+                anchorTextBox.Visible = !(_anchor.X == 0 && _anchor.Y == 0);
+            }
+        }
+
+        async private void FrozeScreen()
+        {
+            while (true)
+            {
+                await Task.Delay(50);
+
+                if (!GetAsyncKeyState((int)Keys.Enter)) continue;
+
+                _screenshoted = !_screenshoted;
+                frozedIndicator.Visible = _screenshoted;
+
+                using (Graphics graphics = Graphics.FromImage(_screenshotedBitmap))
+                {
+                    graphics.CopyFromScreen(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
+                }
             }
         }
     }
