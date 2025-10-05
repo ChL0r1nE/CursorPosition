@@ -36,6 +36,7 @@
             this.colorBoxG = new System.Windows.Forms.TextBox();
             this.colorBoxB = new System.Windows.Forms.TextBox();
             this.frozedIndicator = new System.Windows.Forms.TextBox();
+            this.dataSavedIndicator = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // textBoxX
@@ -119,13 +120,27 @@
             this.frozedIndicator.Size = new System.Drawing.Size(75, 20);
             this.frozedIndicator.TabIndex = 9;
             this.frozedIndicator.Text = "ScreenFrozed";
+            this.frozedIndicator.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.frozedIndicator.Visible = false;
+            // 
+            // dataSavedIndicator
+            // 
+            this.dataSavedIndicator.BackColor = System.Drawing.SystemColors.Info;
+            this.dataSavedIndicator.Location = new System.Drawing.Point(0, 60);
+            this.dataSavedIndicator.Name = "dataSavedIndicator";
+            this.dataSavedIndicator.ReadOnly = true;
+            this.dataSavedIndicator.Size = new System.Drawing.Size(100, 20);
+            this.dataSavedIndicator.TabIndex = 10;
+            this.dataSavedIndicator.Text = "Data saved";
+            this.dataSavedIndicator.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.dataSavedIndicator.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(179, 67);
+            this.ClientSize = new System.Drawing.Size(177, 81);
+            this.Controls.Add(this.dataSavedIndicator);
             this.Controls.Add(this.frozedIndicator);
             this.Controls.Add(this.colorBoxB);
             this.Controls.Add(this.colorBoxG);
@@ -151,6 +166,7 @@
         private System.Windows.Forms.TextBox colorBoxG;
         private System.Windows.Forms.TextBox colorBoxB;
         private System.Windows.Forms.TextBox frozedIndicator;
+        private System.Windows.Forms.TextBox dataSavedIndicator;
     }
 }
 

@@ -15,21 +15,39 @@ namespace CursorPosition
         [DllImport("user32.dll")]
         private static extern bool GetAsyncKeyState(int vKey);
 
-        private Point _anchor = new Point(0, 0);
-
         private readonly Bitmap _screenshotedBitmap = new Bitmap(1920, 1080, PixelFormat.Format32bppArgb);
+        private readonly Action _onUpade;
+
+        private Point _anchor = new Point(0, 0);
         private bool _screenshoted = false;
+        private bool _saved = false;
 
         public Form1()
         {
             InitializeComponent();
 
-            UpdatePositionAndColor();
-            SetAnchorCheck();
-            FrozeScreen();
+            _onUpade += UpdatePositionAndColor;
+            _onUpade += UpdateAnchor;
+            _onUpade += UpdateScreenshot;
+            _onUpade += UpdateSave;
+
+            UpdateLoop();
 
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             TopMost = true;
+        }
+
+        async private void UpdateLoop()
+        {
+            while (true)
+            {
+                if (!_saved)
+                    _onUpade?.Invoke();
+                else
+                    UpdateSave();
+
+                await Task.Delay(100);
+            }
         }
 
         private Color GetDesktopColor(int x, int y)
@@ -55,57 +73,56 @@ namespace CursorPosition
             hideBackgroundButton.Dispose();
         }
 
-        async private void UpdatePositionAndColor()
+        private void UpdatePositionAndColor()
         {
-            while (true)
-            {
-                GetCursorPos(out Point cursorPosition);
+            GetCursorPos(out Point cursorPosition);
 
-                textBoxX.Text = $"{cursorPosition.X - _anchor.X}";
-                textBoxY.Text = $"{cursorPosition.Y - _anchor.Y}";
+            textBoxX.Text = $"{cursorPosition.X - _anchor.X}";
+            textBoxY.Text = $"{cursorPosition.Y - _anchor.Y}";
 
-                Color pixelColor = GetDesktopColor(cursorPosition.X, cursorPosition.Y);
+            Color pixelColor = GetDesktopColor(cursorPosition.X, cursorPosition.Y);
 
-                colorBoxR.Text = $"{pixelColor.R}";
-                colorBoxG.Text = $"{pixelColor.G}";
-                colorBoxB.Text = $"{pixelColor.B}";
-
-                await Task.Delay(100);
-            }
+            colorBoxR.Text = $"{pixelColor.R}";
+            colorBoxG.Text = $"{pixelColor.G}";
+            colorBoxB.Text = $"{pixelColor.B}";
         }
 
-        async private void SetAnchorCheck()
+        private void UpdateAnchor()
         {
-            while (true)
+            if (GetAsyncKeyState((int)Keys.NumPad8))
             {
-                await Task.Delay(50);
-
-                if (!GetAsyncKeyState((int)Keys.Space)) continue;
-
                 GetCursorPos(out Point cursorPosition);
-
                 _anchor = new Point(cursorPosition.X, cursorPosition.Y);
-                anchorTextBox.Text = $"anchor {cursorPosition.X} {cursorPosition.Y}";
+
+                anchorTextBox.Text = $"anchor {_anchor.X} {_anchor.Y}";
+                anchorTextBox.Visible = !(_anchor.X == 0 && _anchor.Y == 0);
+            }
+            else if (GetAsyncKeyState((int)Keys.NumPad7))
+            {
+                _anchor = new Point(0, 0);
+
+                anchorTextBox.Text = $"anchor {_anchor.X} {_anchor.Y}";
                 anchorTextBox.Visible = !(_anchor.X == 0 && _anchor.Y == 0);
             }
         }
 
-        async private void FrozeScreen()
+        private void UpdateScreenshot()
         {
-            while (true)
-            {
-                await Task.Delay(50);
+            if (!GetAsyncKeyState((int)Keys.NumPad6)) return;
 
-                if (!GetAsyncKeyState((int)Keys.Enter)) continue;
+            _screenshoted = !_screenshoted;
+            frozedIndicator.Visible = _screenshoted;
 
-                _screenshoted = !_screenshoted;
-                frozedIndicator.Visible = _screenshoted;
+            using (Graphics graphics = Graphics.FromImage(_screenshotedBitmap))
+                graphics.CopyFromScreen(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
+        }
 
-                using (Graphics graphics = Graphics.FromImage(_screenshotedBitmap))
-                {
-                    graphics.CopyFromScreen(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
-                }
-            }
+        private void UpdateSave()
+        {
+            if (!GetAsyncKeyState((int)Keys.NumPad2)) return;
+
+            _saved = !_saved;
+            dataSavedIndicator.Visible = _saved;
         }
     }
 }
