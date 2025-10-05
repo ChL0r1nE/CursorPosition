@@ -42,33 +42,36 @@
             // textBoxX
             // 
             this.textBoxX.BackColor = System.Drawing.SystemColors.Info;
+            this.textBoxX.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxX.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.textBoxX.Location = new System.Drawing.Point(0, 20);
+            this.textBoxX.Location = new System.Drawing.Point(0, 13);
             this.textBoxX.Name = "textBoxX";
             this.textBoxX.ReadOnly = true;
-            this.textBoxX.Size = new System.Drawing.Size(50, 20);
+            this.textBoxX.Size = new System.Drawing.Size(50, 13);
             this.textBoxX.TabIndex = 0;
             this.textBoxX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBoxY
             // 
             this.textBoxY.BackColor = System.Drawing.SystemColors.Info;
+            this.textBoxY.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxY.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.textBoxY.Location = new System.Drawing.Point(50, 20);
+            this.textBoxY.Location = new System.Drawing.Point(50, 13);
             this.textBoxY.Name = "textBoxY";
             this.textBoxY.ReadOnly = true;
-            this.textBoxY.Size = new System.Drawing.Size(50, 20);
+            this.textBoxY.Size = new System.Drawing.Size(50, 13);
             this.textBoxY.TabIndex = 1;
             this.textBoxY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // anchorTextBox
             // 
             this.anchorTextBox.BackColor = System.Drawing.SystemColors.Info;
+            this.anchorTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.anchorTextBox.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.anchorTextBox.Location = new System.Drawing.Point(0, 0);
             this.anchorTextBox.Name = "anchorTextBox";
             this.anchorTextBox.ReadOnly = true;
-            this.anchorTextBox.Size = new System.Drawing.Size(100, 20);
+            this.anchorTextBox.Size = new System.Drawing.Size(100, 13);
             this.anchorTextBox.TabIndex = 3;
             this.anchorTextBox.Text = "anchor 0 0";
             this.anchorTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -76,48 +79,57 @@
             // 
             // hideBackgroundButton
             // 
+            this.hideBackgroundButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.hideBackgroundButton.Location = new System.Drawing.Point(100, 0);
             this.hideBackgroundButton.Name = "hideBackgroundButton";
-            this.hideBackgroundButton.Size = new System.Drawing.Size(75, 40);
+            this.hideBackgroundButton.Size = new System.Drawing.Size(75, 26);
             this.hideBackgroundButton.TabIndex = 5;
-            this.hideBackgroundButton.Text = "Hide background";
+            this.hideBackgroundButton.Text = "Hide back";
             this.hideBackgroundButton.UseVisualStyleBackColor = true;
             this.hideBackgroundButton.Click += new System.EventHandler(this.HideBackground);
             // 
             // colorBoxR
             // 
             this.colorBoxR.BackColor = System.Drawing.SystemColors.Info;
-            this.colorBoxR.Location = new System.Drawing.Point(0, 40);
+            this.colorBoxR.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.colorBoxR.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.colorBoxR.Location = new System.Drawing.Point(0, 26);
             this.colorBoxR.Name = "colorBoxR";
             this.colorBoxR.ReadOnly = true;
-            this.colorBoxR.Size = new System.Drawing.Size(33, 20);
+            this.colorBoxR.Size = new System.Drawing.Size(33, 13);
             this.colorBoxR.TabIndex = 6;
             // 
             // colorBoxG
             // 
             this.colorBoxG.BackColor = System.Drawing.SystemColors.Info;
-            this.colorBoxG.Location = new System.Drawing.Point(33, 40);
+            this.colorBoxG.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.colorBoxG.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.colorBoxG.Location = new System.Drawing.Point(33, 26);
             this.colorBoxG.Name = "colorBoxG";
             this.colorBoxG.ReadOnly = true;
-            this.colorBoxG.Size = new System.Drawing.Size(34, 20);
+            this.colorBoxG.Size = new System.Drawing.Size(34, 13);
             this.colorBoxG.TabIndex = 7;
             // 
             // colorBoxB
             // 
             this.colorBoxB.BackColor = System.Drawing.SystemColors.Info;
-            this.colorBoxB.Location = new System.Drawing.Point(67, 40);
+            this.colorBoxB.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.colorBoxB.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.colorBoxB.Location = new System.Drawing.Point(67, 26);
             this.colorBoxB.Name = "colorBoxB";
             this.colorBoxB.ReadOnly = true;
-            this.colorBoxB.Size = new System.Drawing.Size(33, 20);
+            this.colorBoxB.Size = new System.Drawing.Size(33, 13);
             this.colorBoxB.TabIndex = 8;
             // 
             // frozedIndicator
             // 
             this.frozedIndicator.BackColor = System.Drawing.SystemColors.Info;
-            this.frozedIndicator.Location = new System.Drawing.Point(100, 40);
+            this.frozedIndicator.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.frozedIndicator.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.frozedIndicator.Location = new System.Drawing.Point(100, 26);
             this.frozedIndicator.Name = "frozedIndicator";
             this.frozedIndicator.ReadOnly = true;
-            this.frozedIndicator.Size = new System.Drawing.Size(75, 20);
+            this.frozedIndicator.Size = new System.Drawing.Size(75, 13);
             this.frozedIndicator.TabIndex = 9;
             this.frozedIndicator.Text = "ScreenFrozed";
             this.frozedIndicator.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -126,10 +138,12 @@
             // dataSavedIndicator
             // 
             this.dataSavedIndicator.BackColor = System.Drawing.SystemColors.Info;
-            this.dataSavedIndicator.Location = new System.Drawing.Point(0, 60);
+            this.dataSavedIndicator.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataSavedIndicator.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.dataSavedIndicator.Location = new System.Drawing.Point(0, 39);
             this.dataSavedIndicator.Name = "dataSavedIndicator";
             this.dataSavedIndicator.ReadOnly = true;
-            this.dataSavedIndicator.Size = new System.Drawing.Size(100, 20);
+            this.dataSavedIndicator.Size = new System.Drawing.Size(100, 13);
             this.dataSavedIndicator.TabIndex = 10;
             this.dataSavedIndicator.Text = "Data saved";
             this.dataSavedIndicator.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -139,7 +153,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(177, 81);
+            this.ClientSize = new System.Drawing.Size(177, 55);
             this.Controls.Add(this.dataSavedIndicator);
             this.Controls.Add(this.frozedIndicator);
             this.Controls.Add(this.colorBoxB);

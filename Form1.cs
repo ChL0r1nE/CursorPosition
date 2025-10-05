@@ -26,8 +26,8 @@ namespace CursorPosition
         {
             InitializeComponent();
 
-            _onUpade += UpdatePositionAndColor;
             _onUpade += UpdateAnchor;
+            _onUpade += UpdatePositionAndColor;
             _onUpade += UpdateScreenshot;
             _onUpade += UpdateSave;
 
@@ -68,6 +68,7 @@ namespace CursorPosition
 
         private void HideBackground(object sender, EventArgs e)
         {
+            Opacity = 0.75f;
             FormBorderStyle = FormBorderStyle.None;
             TransparencyKey = BackColor;
             hideBackgroundButton.Dispose();
