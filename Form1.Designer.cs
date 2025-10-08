@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.textBoxX = new System.Windows.Forms.TextBox();
             this.textBoxY = new System.Windows.Forms.TextBox();
             this.anchorTextBox = new System.Windows.Forms.TextBox();
@@ -37,6 +38,9 @@
             this.colorBoxB = new System.Windows.Forms.TextBox();
             this.frozedIndicator = new System.Windows.Forms.TextBox();
             this.dataSavedIndicator = new System.Windows.Forms.TextBox();
+            this.ScaleComboBox = new System.Windows.Forms.ComboBox();
+            this.ScaledTextBoxY = new System.Windows.Forms.TextBox();
+            this.ScaledTextBoxX = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // textBoxX
@@ -79,13 +83,14 @@
             // 
             // hideBackgroundButton
             // 
+            this.hideBackgroundButton.BackColor = System.Drawing.SystemColors.Info;
             this.hideBackgroundButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.hideBackgroundButton.Image = ((System.Drawing.Image)(resources.GetObject("hideBackgroundButton.Image")));
             this.hideBackgroundButton.Location = new System.Drawing.Point(100, 0);
             this.hideBackgroundButton.Name = "hideBackgroundButton";
-            this.hideBackgroundButton.Size = new System.Drawing.Size(75, 26);
+            this.hideBackgroundButton.Size = new System.Drawing.Size(25, 25);
             this.hideBackgroundButton.TabIndex = 5;
-            this.hideBackgroundButton.Text = "Hide back";
-            this.hideBackgroundButton.UseVisualStyleBackColor = true;
+            this.hideBackgroundButton.UseVisualStyleBackColor = false;
             this.hideBackgroundButton.Click += new System.EventHandler(this.HideBackground);
             // 
             // colorBoxR
@@ -98,6 +103,7 @@
             this.colorBoxR.ReadOnly = true;
             this.colorBoxR.Size = new System.Drawing.Size(33, 13);
             this.colorBoxR.TabIndex = 6;
+            this.colorBoxR.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // colorBoxG
             // 
@@ -109,6 +115,7 @@
             this.colorBoxG.ReadOnly = true;
             this.colorBoxG.Size = new System.Drawing.Size(34, 13);
             this.colorBoxG.TabIndex = 7;
+            this.colorBoxG.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // colorBoxB
             // 
@@ -120,6 +127,7 @@
             this.colorBoxB.ReadOnly = true;
             this.colorBoxB.Size = new System.Drawing.Size(33, 13);
             this.colorBoxB.TabIndex = 8;
+            this.colorBoxB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // frozedIndicator
             // 
@@ -140,20 +148,64 @@
             this.dataSavedIndicator.BackColor = System.Drawing.SystemColors.Info;
             this.dataSavedIndicator.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataSavedIndicator.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.dataSavedIndicator.Location = new System.Drawing.Point(0, 39);
+            this.dataSavedIndicator.Location = new System.Drawing.Point(100, 39);
             this.dataSavedIndicator.Name = "dataSavedIndicator";
             this.dataSavedIndicator.ReadOnly = true;
-            this.dataSavedIndicator.Size = new System.Drawing.Size(100, 13);
+            this.dataSavedIndicator.Size = new System.Drawing.Size(75, 13);
             this.dataSavedIndicator.TabIndex = 10;
             this.dataSavedIndicator.Text = "Data saved";
             this.dataSavedIndicator.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.dataSavedIndicator.Visible = false;
             // 
+            // ScaleComboBox
+            // 
+            this.ScaleComboBox.FormattingEnabled = true;
+            this.ScaleComboBox.Items.AddRange(new object[] {
+            "100",
+            "125"});
+            this.ScaleComboBox.Location = new System.Drawing.Point(125, 2);
+            this.ScaleComboBox.Name = "ScaleComboBox";
+            this.ScaleComboBox.Size = new System.Drawing.Size(50, 21);
+            this.ScaleComboBox.TabIndex = 11;
+            this.ScaleComboBox.Tag = "";
+            this.ScaleComboBox.Text = "100";
+            this.ScaleComboBox.SelectedIndexChanged += new System.EventHandler(this.ScaleComboBox_SelectedIndexChanged);
+            // 
+            // ScaledTextBoxY
+            // 
+            this.ScaledTextBoxY.BackColor = System.Drawing.SystemColors.Info;
+            this.ScaledTextBoxY.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ScaledTextBoxY.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.ScaledTextBoxY.Location = new System.Drawing.Point(50, 39);
+            this.ScaledTextBoxY.Name = "ScaledTextBoxY";
+            this.ScaledTextBoxY.ReadOnly = true;
+            this.ScaledTextBoxY.Size = new System.Drawing.Size(50, 13);
+            this.ScaledTextBoxY.TabIndex = 13;
+            this.ScaledTextBoxY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ScaledTextBoxY.Visible = false;
+            // 
+            // ScaledTextBoxX
+            // 
+            this.ScaledTextBoxX.BackColor = System.Drawing.SystemColors.Info;
+            this.ScaledTextBoxX.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ScaledTextBoxX.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.ScaledTextBoxX.Location = new System.Drawing.Point(0, 39);
+            this.ScaledTextBoxX.Name = "ScaledTextBoxX";
+            this.ScaledTextBoxX.ReadOnly = true;
+            this.ScaledTextBoxX.Size = new System.Drawing.Size(50, 13);
+            this.ScaledTextBoxX.TabIndex = 12;
+            this.ScaledTextBoxX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ScaledTextBoxX.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(177, 55);
+            this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.ClientSize = new System.Drawing.Size(178, 57);
+            this.Controls.Add(this.ScaledTextBoxY);
+            this.Controls.Add(this.ScaledTextBoxX);
+            this.Controls.Add(this.ScaleComboBox);
             this.Controls.Add(this.dataSavedIndicator);
             this.Controls.Add(this.frozedIndicator);
             this.Controls.Add(this.colorBoxB);
@@ -163,6 +215,7 @@
             this.Controls.Add(this.anchorTextBox);
             this.Controls.Add(this.textBoxY);
             this.Controls.Add(this.textBoxX);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -181,6 +234,9 @@
         private System.Windows.Forms.TextBox colorBoxB;
         private System.Windows.Forms.TextBox frozedIndicator;
         private System.Windows.Forms.TextBox dataSavedIndicator;
+        private System.Windows.Forms.ComboBox ScaleComboBox;
+        private System.Windows.Forms.TextBox ScaledTextBoxY;
+        private System.Windows.Forms.TextBox ScaledTextBoxX;
     }
 }
 

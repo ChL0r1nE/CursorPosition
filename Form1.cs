@@ -19,7 +19,10 @@ namespace CursorPosition
         private readonly Action _onUpade;
 
         private Point _anchor = new Point(0, 0);
+        private float _scale = 1f;
+
         private bool _screenshoted = false;
+        private bool _isMinilized = false;
         private bool _saved = false;
 
         public Form1()
@@ -59,7 +62,7 @@ namespace CursorPosition
                 using (Bitmap bitmap = new Bitmap(1920, 1080, PixelFormat.Format32bppArgb))
                 {
                     using (Graphics graphics = Graphics.FromImage(bitmap))
-                        graphics.CopyFromScreen(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
+                        graphics.CopyFromScreen(0, 0, 0, 0, new Size(1920, 1080), CopyPixelOperation.SourceCopy);
 
                     return bitmap.GetPixel(x, y);
                 }
@@ -68,10 +71,21 @@ namespace CursorPosition
 
         private void HideBackground(object sender, EventArgs e)
         {
-            Opacity = 0.75f;
-            FormBorderStyle = FormBorderStyle.None;
-            TransparencyKey = BackColor;
-            hideBackgroundButton.Dispose();
+            _isMinilized = !_isMinilized;
+
+            if (_isMinilized)
+            {
+                FormBorderStyle = FormBorderStyle.None;
+                TransparencyKey = BackColor;
+            }
+            else
+            {
+                FormBorderStyle = FormBorderStyle.FixedSingle;
+                TransparencyKey = Color.Violet;
+            }
+
+            ScaleComboBox.Visible = !_isMinilized;
+            Opacity = _isMinilized ? 0.75f : 1f;
         }
 
         private void UpdatePositionAndColor()
@@ -81,7 +95,20 @@ namespace CursorPosition
             textBoxX.Text = $"{cursorPosition.X - _anchor.X}";
             textBoxY.Text = $"{cursorPosition.Y - _anchor.Y}";
 
-            Color pixelColor = GetDesktopColor(cursorPosition.X, cursorPosition.Y);
+            Color pixelColor;
+
+            if (_scale != 1f)
+            {
+                int scaledX = (int)(cursorPosition.X * _scale);
+                int scaledY = (int)(cursorPosition.Y * _scale);
+
+                ScaledTextBoxX.Text = $"{scaledX}";
+                ScaledTextBoxY.Text = $"{scaledY}";
+
+                pixelColor = GetDesktopColor(scaledX, scaledY);
+            }
+            else
+                pixelColor = GetDesktopColor(cursorPosition.X, cursorPosition.Y);
 
             colorBoxR.Text = $"{pixelColor.R}";
             colorBoxG.Text = $"{pixelColor.G}";
@@ -115,7 +142,7 @@ namespace CursorPosition
             frozedIndicator.Visible = _screenshoted;
 
             using (Graphics graphics = Graphics.FromImage(_screenshotedBitmap))
-                graphics.CopyFromScreen(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
+                graphics.CopyFromScreen(0, 0, 0, 0, new Size(1920, 1080), CopyPixelOperation.SourceCopy);
         }
 
         private void UpdateSave()
@@ -124,6 +151,13 @@ namespace CursorPosition
 
             _saved = !_saved;
             dataSavedIndicator.Visible = _saved;
+        }
+
+        private void ScaleComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _scale = int.Parse(ScaleComboBox.Text) / 100f;
+            ScaledTextBoxX.Visible = _scale != 1f;
+            ScaledTextBoxY.Visible = _scale != 1f;
         }
     }
 }
