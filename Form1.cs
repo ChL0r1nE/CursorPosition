@@ -72,20 +72,10 @@ namespace CursorPosition
         private void HideBackground(object sender, EventArgs e)
         {
             _isMinilized = !_isMinilized;
-
-            if (_isMinilized)
-            {
-                FormBorderStyle = FormBorderStyle.None;
-                TransparencyKey = BackColor;
-            }
-            else
-            {
-                FormBorderStyle = FormBorderStyle.FixedSingle;
-                TransparencyKey = Color.Violet;
-            }
-
             ScaleComboBox.Visible = !_isMinilized;
-            Opacity = _isMinilized ? 0.75f : 1f;
+
+            FormBorderStyle = _isMinilized ? FormBorderStyle.None : FormBorderStyle.FixedSingle;
+            TransparencyKey = _isMinilized ? BackColor : Color.Violet;
         }
 
         private void UpdatePositionAndColor()
